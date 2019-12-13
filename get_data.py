@@ -2,10 +2,12 @@
 #!pip3 install requests
 #!pip3 install BeautifulSoup4
 from bs4 import BeautifulSoup
+from datetime import datetime
 import requests
 import json
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
-save_file = 'test.csv'
+now = datetime.now()
+save_file = 'data/' + str(now.month) + str(now.day) + '.csv'
 
 html_file = requests.get(url)
 soup = BeautifulSoup(html_file.text)

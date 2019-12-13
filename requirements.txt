@@ -1,0 +1,11 @@
+dash
+matplotlib
+numpy
+pandas
+plotly
+pymongo
+ipywidgets
+notebook
+expiringdict
+beautifulsoup4
+datetime

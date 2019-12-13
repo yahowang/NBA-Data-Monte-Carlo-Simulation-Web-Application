@@ -9,4 +9,3 @@ ipywidgets
 notebook
 expiringdict
 beautifulsoup4
-json

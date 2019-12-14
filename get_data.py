@@ -6,7 +6,6 @@ import time
 import database
 from database import upsert_nba
 import pandas as pds
-import html
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
 DOWNLOAD_PERIOD = 30    # 30 seconds

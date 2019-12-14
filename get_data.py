@@ -3,8 +3,10 @@ from datetime import datetime
 import requests
 import sched
 import os.path
+import time
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
+DOWNLOAD_PERIOD = 10
 
 def _get_file_name(i):
     now = datetime.now()
@@ -39,5 +41,15 @@ def save_data():
     f.close()
     return name
 
+def main_loop(timeout = DOWNLOAD_PERIOD):
+    scheduler = sched.scheduler(time.time, time.sleep)
+
+    def _worker():
+        save_data()
+        scheduler.enter(timeout, 1, _worker)
+
+    scheduler.enter(timeout, 1, _worker) # start the first event
+    scheduler.run(blocking=True)
+
 if __name__ == "__main__":
-    save_data()
+    main_loop()

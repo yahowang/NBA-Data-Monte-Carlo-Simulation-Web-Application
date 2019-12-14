@@ -8,7 +8,7 @@ from database import upsert_nba
 import pandas as pds
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
-DOWNLOAD_PERIOD = 10    # 10 seconds
+DOWNLOAD_PERIOD = 300    # 300 seconds
 counting = 1
 
 def _get_data():
@@ -38,8 +38,6 @@ def update_data_once():
     global counting
     print("Fectching Data", counting, 'time')
     counting += 1
-
-
 
 def main_loop(timeout = DOWNLOAD_PERIOD):
     scheduler = sched.scheduler(time.time, time.sleep)

@@ -8,7 +8,7 @@ from database import upsert_nba
 import pandas as pds
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
-DOWNLOAD_PERIOD = 60    # 60 seconds
+DOWNLOAD_PERIOD = 10    # 10 seconds
 counting = 1
 
 def _get_data():
@@ -36,7 +36,7 @@ def update_data_once():
     df = pds.read_csv(file_name)
     upsert_nba(df)
     global counting
-    print(counting)
+    print("Fectching Data", counting, 'time')
     counting += 1
 
 

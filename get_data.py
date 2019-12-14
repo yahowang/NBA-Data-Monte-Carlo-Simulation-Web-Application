@@ -2,15 +2,14 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
 import sched
-import os.path
 import time
+import database
+from database import upsert_nba
+import pandas as pds
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
-DOWNLOAD_PERIOD = 10
-
-def _get_file_name(i):
-    now = datetime.now()
-    return 'data/' + str(now.month) + str(now.day) + '_' + str(i) + '.csv'
+DOWNLOAD_PERIOD = 60    # 60 seconds
+i = 1
 
 def _get_data():
     html_file = requests.get(url)
@@ -27,29 +26,30 @@ def _get_data():
             data.append([element if element else "NA" for element in cols])
     return data
 
-
-def save_data():
-    name = _get_file_name(1)
-    i = 2
-    while os.path.isfile(name):
-        name = _get_file_name(i)
-        i += 1
-
-    f = open(name, 'w' ,errors = 'ignore')
+def update_data_once():
+    file_name = 'data\data.csv'
+    f = open(file_name, 'w' ,errors = 'ignore')
     for i in _get_data():
         f.write(','.join(i)+'\n')
     f.close()
-    return name
+
+    df = pds.read_csv(file_name)
+    upsert_nba(df)
+    print(i)
+    i+= 1
+
+
 
 def main_loop(timeout = DOWNLOAD_PERIOD):
     scheduler = sched.scheduler(time.time, time.sleep)
 
     def _worker():
-        save_data()
+        update_data_once()
         scheduler.enter(timeout, 1, _worker)
 
-    scheduler.enter(timeout, 1, _worker) # start the first event
+    scheduler.enter(0, 1, _worker) # start the first event
     scheduler.run(blocking=True)
 
 if __name__ == "__main__":
     main_loop()
+    

@@ -10,3 +10,4 @@ expiringdict
 beautifulsoup4
 datetime
 requests
+sklearn

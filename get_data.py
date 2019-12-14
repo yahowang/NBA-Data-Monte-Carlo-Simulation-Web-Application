@@ -9,7 +9,7 @@ import pandas as pds
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
 DOWNLOAD_PERIOD = 60    # 60 seconds
-i = 1
+counting = 1
 
 def _get_data():
     html_file = requests.get(url)
@@ -35,8 +35,8 @@ def update_data_once():
 
     df = pds.read_csv(file_name)
     upsert_nba(df)
-    print(i)
-    i+= 1
+    print(counting)
+    counting += 1
 
 
 

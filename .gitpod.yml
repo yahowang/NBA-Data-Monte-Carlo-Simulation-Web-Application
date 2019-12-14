@@ -8,7 +8,7 @@ ports:
 tasks:
   - command: cp -r .jupyter /home/gitpod/
   - command: mongod
-  - command: pip3 install -r requirements.txt && (python3 get_data.py & app.py)
+  - command: pip3 install -r requirements.txt && (python3 get_data.py & python3 app.py)
 vscode:
   extensions:
     - ms-python.python@2019.9.34911:NHtRMp5fFB2KUUw72DlGug==

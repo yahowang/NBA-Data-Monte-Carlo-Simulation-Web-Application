@@ -24,7 +24,7 @@ def _get_data():
         cols = row.find_all('td')
         if len(cols):
             cols = [element.text.strip() for element in cols]
-            data.append([element if element else "NA" for element in cols])
+            data.append([element if element else 0 for element in cols])
     return data
 
 def update_data_once():
@@ -37,7 +37,7 @@ def update_data_once():
     df = pds.read_csv(file_name)
     upsert_nba(df)
     global counting
-    print("Fectching Data", counting, 'time')
+    print("Fectching Data", counting, 'times')
     counting += 1
 
 def main_loop(timeout = DOWNLOAD_PERIOD):
@@ -52,4 +52,3 @@ def main_loop(timeout = DOWNLOAD_PERIOD):
 
 if __name__ == "__main__":
     main_loop()
-    

@@ -27,7 +27,7 @@ def _get_data():
     return data
 
 def update_data_once():
-    file_name = 'data\data.csv'
+    file_name = 'data/data.csv'
     f = open(file_name, 'w' ,errors = 'ignore')
     for i in _get_data():
         f.write(','.join(i)+'\n')

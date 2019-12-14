@@ -6,6 +6,7 @@ import time
 import database
 from database import upsert_nba
 import pandas as pds
+import html
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
 DOWNLOAD_PERIOD = 30    # 30 seconds
@@ -14,7 +15,7 @@ counting = 1
 
 def _get_data():
     html_file = requests.get(url)
-    soup = BeautifulSoup(html_file.text)
+    soup = BeautifulSoup(html_file.text, features="html.parser)
     table_body = soup.find('tbody')
     rows = table_body.find_all('tr')
     data = []

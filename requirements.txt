@@ -11,3 +11,4 @@ beautifulsoup4
 datetime
 requests
 sklearn
+html

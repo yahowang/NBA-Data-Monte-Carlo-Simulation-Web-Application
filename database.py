@@ -23,9 +23,8 @@ def to_df():
     if len(data) == 0:
         return None
     df  = pds.DataFrame.from_records(data)
+    df.drop("_id", axis=1, inplace=True)
     return df
 
 if __name__ == "__main__":
     print(to_df())
-
-

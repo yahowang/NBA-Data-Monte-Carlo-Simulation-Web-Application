@@ -9,3 +9,4 @@ notebook
 expiringdict
 beautifulsoup4
 datetime
+requests

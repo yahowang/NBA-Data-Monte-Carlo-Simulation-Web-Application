@@ -35,6 +35,7 @@ def update_data_once():
 
     df = pds.read_csv(file_name)
     upsert_nba(df)
+    global counting
     print(counting)
     counting += 1
 

@@ -24,7 +24,7 @@ def _get_data():
         cols = row.find_all('td')
         if len(cols):
             cols = [element.text.strip() for element in cols]
-            data.append([element if element else 0 for element in cols])
+            data.append([element if element else '0' for element in cols])
     return data
 
 def update_data_once():

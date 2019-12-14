@@ -14,7 +14,7 @@ counting = 1
 
 def _get_data():
     html_file = requests.get(url)
-    soup = BeautifulSoup(html_file.text, features="html.parser)
+    soup = BeautifulSoup(html_file.text)
     table_body = soup.find('tbody')
     rows = table_body.find_all('tr')
     data = []

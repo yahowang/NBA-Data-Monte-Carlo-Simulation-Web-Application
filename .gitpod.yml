@@ -5,6 +5,7 @@ ports:
   - port: 27017
   - port: 8888
   - port: 1050
+  - port: 8050
 tasks:
   - command: cp -r .jupyter /home/gitpod/
   - command: mongod

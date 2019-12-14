@@ -8,7 +8,7 @@ from database import upsert_nba
 import pandas as pds
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
-DOWNLOAD_PERIOD = 300    # 300 seconds
+DOWNLOAD_PERIOD = 30    # 30 seconds
 counting = 1
 
 def _get_data():

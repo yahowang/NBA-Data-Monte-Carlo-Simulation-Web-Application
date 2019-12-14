@@ -11,6 +11,7 @@ url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
 DOWNLOAD_PERIOD = 30    # 30 seconds
 counting = 1
 
+
 def _get_data():
     html_file = requests.get(url)
     soup = BeautifulSoup(html_file.text)

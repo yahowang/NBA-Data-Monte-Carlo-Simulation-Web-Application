@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
-# from database import *
+from database import *
 
 
-df = pd.read_csv('data/df.csv')
-# df = to_df()
+# df = pd.read_csv('data/df.csv')
+df = to_df()
 
 def _cleaning(df):
     df.loc[df['FGA'] == 0, ['FG%', 'eFG%']] = 0

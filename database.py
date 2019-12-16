@@ -17,14 +17,5 @@ def fetch_all_nba():
     collection = db.get_collection("energy")
     return list(collection.find())
 
-def to_df():
-    """Converts list of dict to DataFrame"""
-    data = fetch_all_nba()
-    if len(data) == 0:
-        return None
-    df  = pds.DataFrame.from_records(data)
-    df.drop("_id", axis=1, inplace=True)
-    return df
-
 if __name__ == "__main__":
-    print(to_df())
+    print(fetch_all_nba())

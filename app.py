@@ -130,9 +130,15 @@ def description():
         #### Data Source
         Data is obtained from https://www.basketball-reference.com/leagues/NBA_2020_per_game.html.
 
-        ** The data is updated everyday after all match have been completed on that day**. 
+        ** The data is updated everyday after all match have been completed on that day. For demonstration and future usage, 
+            we update the data every 30 seconds**. 
         
         Our data include all registered players. You can select two of them to compare their performance below.
+        Please note: offense/defense consider the players' effect in team offense/defense as well as the overall
+        team offense/defense performance. Impact represents a player's contribution to the team and its influence
+        to the opponent. Scoring consider both players' efficiency and individual overall scores. Control represents
+        a player's stability and accuracy on the field. We recommend looking at a player's impact when evaluating its
+        influence in NBA.
         ''', className='eleven columns', style={'paddingLeft': '5%'})], className="row")
 
 
@@ -183,7 +189,8 @@ def enhancement_description():
         ### Fantasy Team
         Finishing viewing the players?  Now select and build your team. You are able to build two teams, and our
         application will be able to visualize the overall team summary using the radar plot. This plot is an 
-        comprehensive estimation on the players you selected. 
+        comprehensive estimation on the players you selected. After selecting all ten players, click 'simulate
+         the match', and you will able to view the match result as well as the scores.
         ''', className='eleven columns', style={'paddingLeft': '5%'})], className="row")
 
 
@@ -328,17 +335,18 @@ def architecture_summary():
             # Project Architecture
             This project uses MongoDB as the database. All data acquired are stored in raw form to the
             database (with de-duplication). An abstract layer is built in `database.py` so all queries
-            can be done via function call. For a more complicated app, the layer will also be
-            responsible for schema consistency. A `plot.ly` & `dash` app is serving this web page
+            can be done via function call. A `dash` app and `get_data.py` file are serving this web page
             through. Actions on responsive components on the page is redirected to `app.py` which will
-            then update certain components on the page.  
+            then update certain components on the page. Such operations are supported by `data.py` and 
+            'visualization.py' for processing and calculation.
         ''', className='row eleven columns', style={'paddingLeft': '5%'}),
 
         html.Div(children=[
             html.Img(
-                src="https://docs.google.com/drawings/d/e/2PACX-1vQNerIIsLZU2zMdRhIl3ZZkDMIt7jhE_fjZ6ZxhnJ9bKe1emPcjI92lT5L7aZRYVhJgPZ7EURN0AqRh/pub?w=670&amp;h=457",
+                # src="https://docs.google.com/drawings/d/e/2PACX-1vQNerIIsLZU2zMdRhIl3ZZkDMIt7jhE_fjZ6ZxhnJ9bKe1emPcjI92lT5L7aZRYVhJgPZ7EURN0AqRh/pub?w=670&amp;h=457",
+                src="assets/archi.png",
                 className='row'),
-        ], className='row', style={'textAlign': 'center'}),
+        ], className='row', style={'display': 'inline-block', 'width': '48%'}),
 
         dcc.Markdown('''
 

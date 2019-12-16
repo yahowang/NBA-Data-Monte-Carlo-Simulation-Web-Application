@@ -17,7 +17,7 @@ def scale_visualization_data(player_df):
 
 
 def scale_player(player_name, player_cap_dict):
-    player_max = {"Control": 5, "Defense": 120, "Impact": 0.15, "Offense": 140, "Scoring": 0.65}
+    player_max = {"Control": 5, "Defense": 115, "Impact": 0.15, "Offense": 140, "Scoring": 0.65}
 
     player_min = {"Control": 0, "Defense": 90, "Impact": 0, "Offense": 45, "Scoring": 0}
 
@@ -35,7 +35,7 @@ def scale_player(player_name, player_cap_dict):
 
     for i in range(len(player_result)):
         if player_result[i] > 1:
-            player_result[i] = 1
+            player_result[i] = 0.7
         if player_result[i] < 0:
             player_result[i] = 0
     return player_result, feature_list
@@ -144,7 +144,7 @@ def off_def_plot(player_name, off_def_df):
 
     fig = go.Figure()
     fig.add_trace(go.Bar(
-        y=['Offensive Ranking', 'Defensive Ranking'],
+        y=['Offensive Stats Ranking', 'Defensive Stats Ranking'],
 
         x=[off_perc, def_perc],
         name='name5',
@@ -156,7 +156,7 @@ def off_def_plot(player_name, off_def_df):
     ))
 
     fig.add_trace(go.Bar(
-        y=['Offensive Ranking', 'Defensive Ranking'],
+        y=['Offensive Stats Ranking', 'Defensive Stats Ranking'],
         x=[100 - off_perc, 100 - def_perc],
         name='All NBA Players',
         orientation='h',

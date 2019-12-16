@@ -73,7 +73,6 @@ player_name = list(player_cap.index)
 
 player_od_df = player_cap[["Offense", "Defense"]]
 
-nclick = 0
 
 ################################################
 COLORS = ['rgb(67,67,67)', 'rgb(115,115,115)', 'rgb(49,130,189)', 'rgb(189,189,189)']
@@ -91,7 +90,7 @@ def page_header():
                  className="ten columns"),
         html.A([html.Img(id='logo', src=app.get_asset_url('jack.jpeg'),
                          style={'height': '35px', 'paddingTop': '7%', 'paddingRight': '300px'}),
-                html.Span('Data1050 Project Git Repo', style={'fontSize': '2rem', 'height': '35px', 'bottom': 0,
+                html.Span('NBA Git Repo', style={'fontSize': '2rem', 'height': '35px', 'bottom': 0,
                                                         'paddingLeft': '1px', 'color': '#a3a7b0',
                                                         'textDecoration': 'none'})],
                className="two columns row",
@@ -102,6 +101,11 @@ def page_header():
                                       'paddingLeft': '4px', 'color': '#a3a7b0',
                                       'textDecoration': 'none'})],
                className="two columns row"),
+        html.Div(children=[dcc.Markdown('''
+            ---- CTRL-C, CTRL-V: 
+            [About Page](https://docs.google.com/document/d/1cE0z6fRTA5pGp01ROxbX_DoFLjuWJOGx4U9gCLJSLKk/edit?usp=sharing), 
+            [Additional Details](https://docs.google.com/document/d/1gKH3nA29nzM36KF6Bn30TmFd7xrYvLhz_bOSfw_A8tc/edit?usp=sharing)
+            ''', className='eleven columns', style={'paddingLeft': '5%'})], className="row")
     ], className="row")
 
 
@@ -396,8 +400,6 @@ def what_if_handler(player1, player2):
     if player1 and player2:
         player1_result, feature_list = scale_player(player1, Player_ODFAI(player1))
         player2_result, feature_list = scale_player(player2, Player_ODFAI(player2))
-        print(player1_result)
-        print(player2_result)
         cur = radar_capability_comparison(feature_list, player1_result,
                                           player2_result, [player1, player2])
     elif player1:

@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
-from database import *
+# from database import *
 
 
-# df = pd.read_csv('data/df.csv')
-df = to_df()
+df = pd.read_csv('data/df.csv')
+# df = to_df()
 
 def _cleaning(df):
     df.loc[df['FGA'] == 0, ['FG%', 'eFG%']] = 0
@@ -253,8 +253,8 @@ def results(PG1, SG1, SF1, PF1, C1, PG2, SG2, SF2, PF2, C2):
     score1 = int(1.25 * ability1 + np.random.normal(0, 10))
     score2 = int(1.25 * ability2 + np.random.normal(0, 10))
     while score1 == score2:
-        score1 += abs(np.random.normal(10, 5))
-        score2 += abs(np.random.normal(10, 5))
+        score1 += int(abs(np.random.normal(10, 5)))
+        score2 += int(abs(np.random.normal(10, 5)))
     if score1 > score2:
         result = "Team 1 wins!"
     else:

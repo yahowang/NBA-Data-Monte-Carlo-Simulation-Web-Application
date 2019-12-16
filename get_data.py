@@ -9,7 +9,7 @@ import pandas as pds
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
 DOWNLOAD_PERIOD = 30    # 30 seconds
-counting = 1
+COUNTING = 1
 UPDATE_DONE = False
 
 def _get_data():
@@ -36,16 +36,17 @@ def update_data_once():
 
     df = pds.read_csv(file_name)
     global UPDATE_DONE
-    global counting
+    global COUNTING
     UPDATE_DONE = False
     upsert_nba(df)
-    print("Fectching Data", counting, 'times')
-    counting += 1
+    print("Fectching Data", COUNTING, 'times')
+    COUNTING += 1
     UPDATE_DONE = True
 
 def to_df():
     """Converts list of dict to DataFrame"""
     if not UPDATE_DONE:
+        time.sleep(5) # wait for 5 seconds and check if the database update is done
         return to_df()
     data = fetch_all_nba()
     df = pds.DataFrame.from_records(data)

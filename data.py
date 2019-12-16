@@ -6,7 +6,7 @@ from database import *
 # df = pd.read_csv('data/df.csv')
 while True:
     df = to_df()
-    if df != None:
+    if df is not None:
         break
 
 def _cleaning(df):

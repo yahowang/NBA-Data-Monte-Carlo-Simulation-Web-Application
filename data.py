@@ -4,7 +4,10 @@ from database import *
 
 
 # df = pd.read_csv('data/df.csv')
-df = to_df()
+while True:
+    df = to_df()
+    if df != None:
+        break
 
 def _cleaning(df):
     df.loc[df['FGA'] == 0, ['FG%', 'eFG%']] = 0

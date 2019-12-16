@@ -10,7 +10,7 @@ import pandas as pds
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
 DOWNLOAD_PERIOD = 30    # 30 seconds
 counting = 1
-
+UPDATE_DONE = False
 
 def _get_data():
     html_file = requests.get(url)
@@ -35,10 +35,16 @@ def update_data_once():
     f.close()
 
     df = pds.read_csv(file_name)
-    upsert_nba(df)
+    global UPDATE_DONE
     global counting
+    UPDATE_DONE = False
+    upsert_nba(df)
     print("Fectching Data", counting, 'times')
     counting += 1
+    UPDATE_DONE = True
+
+def check_complete_data():
+    return UPDATE_DONE
 
 def main_loop(timeout = DOWNLOAD_PERIOD):
     scheduler = sched.scheduler(time.time, time.sleep)

@@ -1,5 +1,6 @@
 import pymongo
 import pandas as pds
+from get_data import check_complete_data
 
 client = pymongo.MongoClient()
 
@@ -19,10 +20,10 @@ def fetch_all_nba():
 
 def to_df():
     """Converts list of dict to DataFrame"""
+    if not check_complete_data():
+        return to_df()
     data = fetch_all_nba()
-    if len(data) == 0:
-        return None
-    df  = pds.DataFrame.from_records(data)
+    df = pds.DataFrame.from_records(data)
     df.drop("_id", axis=1, inplace=True)
     return df
 

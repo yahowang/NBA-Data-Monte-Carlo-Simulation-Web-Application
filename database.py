@@ -1,5 +1,6 @@
 import pymongo
 import pandas as pds
+import time
 
 client = pymongo.MongoClient()
 
@@ -17,5 +18,15 @@ def fetch_all_nba():
     collection = db.get_collection("energy")
     return list(collection.find())
 
+def to_df():
+    """Converts list of dict to DataFrame"""
+    data = fetch_all_nba()
+    if len(data) == 0:
+        time.sleep(5) # wait for 5 seconds for database completion
+        return to_df()
+    df = pds.DataFrame.from_records(data)
+    df.drop("_id", axis=1, inplace=True)
+    return df
+
 if __name__ == "__main__":
-    print(fetch_all_nba())
+    print(to_df())

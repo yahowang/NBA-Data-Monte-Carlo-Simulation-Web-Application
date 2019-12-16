@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
-from database import *
-
+from get_data import *
 
 # df = pd.read_csv('data/df.csv')
 while True:

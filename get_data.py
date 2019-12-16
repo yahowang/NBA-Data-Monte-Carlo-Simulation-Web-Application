@@ -4,7 +4,7 @@ import requests
 import sched
 import time
 import database
-from database import upsert_nba
+from database import upsert_nba, fetch_all_nba
 import pandas as pds
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
@@ -43,8 +43,14 @@ def update_data_once():
     counting += 1
     UPDATE_DONE = True
 
-def check_complete_data():
-    return UPDATE_DONE
+def to_df():
+    """Converts list of dict to DataFrame"""
+    if not UPDATE_DONE:
+        return to_df()
+    data = fetch_all_nba()
+    df = pds.DataFrame.from_records(data)
+    df.drop("_id", axis=1, inplace=True)
+    return df
 
 def main_loop(timeout = DOWNLOAD_PERIOD):
     scheduler = sched.scheduler(time.time, time.sleep)

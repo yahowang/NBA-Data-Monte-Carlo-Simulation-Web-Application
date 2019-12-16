@@ -3,10 +3,8 @@ import numpy as np
 from get_data import *
 
 # df = pd.read_csv('data/df.csv')
-while True:
-    df = to_df()
-    if df is not None:
-        break
+
+df = to_df()
 
 def _cleaning(df):
     df.loc[df['FGA'] == 0, ['FG%', 'eFG%']] = 0

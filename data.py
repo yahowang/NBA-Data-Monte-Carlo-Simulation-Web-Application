@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-# from database import *
+from database import *
 
 
 # df = pd.read_csv('data/df.csv')

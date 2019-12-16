@@ -4,13 +4,12 @@ import requests
 import sched
 import time
 import database
-from database import upsert_nba, fetch_all_nba
+from database import upsert_nba
 import pandas as pds
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2020_totals.html'
 DOWNLOAD_PERIOD = 30    # 30 seconds
 COUNTING = 1
-UPDATE_DONE = False
 
 def _get_data():
     html_file = requests.get(url)
@@ -33,25 +32,11 @@ def update_data_once():
     for i in _get_data():
         f.write(','.join(i)+'\n')
     f.close()
-
     df = pds.read_csv(file_name)
-    global UPDATE_DONE
     global COUNTING
-    UPDATE_DONE = False
     upsert_nba(df)
     print("Fectching Data", COUNTING, 'times')
     COUNTING += 1
-    UPDATE_DONE = True
-
-def to_df():
-    """Converts list of dict to DataFrame"""
-    if not UPDATE_DONE:
-        time.sleep(5) # wait for 5 seconds and check if the database update is done
-        return to_df()
-    data = fetch_all_nba()
-    df = pds.DataFrame.from_records(data)
-    df.drop("_id", axis=1, inplace=True)
-    return df
 
 def main_loop(timeout = DOWNLOAD_PERIOD):
     scheduler = sched.scheduler(time.time, time.sleep)

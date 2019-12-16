@@ -157,7 +157,7 @@ def advance_df():
     df1 = _cleaning(df)
     performance = []
     for player in df1['Player']:
-        performance.append(Player_ODFAI(player, df1))
+        performance.append(Player_ODFAI(player))
 
     advance_df = pd.DataFrame(performance, index = df1['Player'])
     return advance_df

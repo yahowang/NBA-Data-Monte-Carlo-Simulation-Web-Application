@@ -1,5 +1,6 @@
 import pymongo
 import pandas as pds
+import time
 
 client = pymongo.MongoClient()
 

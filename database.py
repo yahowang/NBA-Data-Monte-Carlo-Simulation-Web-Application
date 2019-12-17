@@ -4,10 +4,10 @@ import time
 
 client = pymongo.MongoClient()
 
-def upsert_nba(df):
+def upsert_nba(data):
     db = client.get_database("nba")
-    collection = db.get_collection("energy")
-    for record in df.to_dict('records'):
+    collection = db.get_collection("nba")
+    for record in data:
         collection.replace_one(
             filter={'Player': record['Player']},
             replacement=record,
@@ -15,7 +15,7 @@ def upsert_nba(df):
 
 def fetch_all_nba():
     db = client.get_database("nba")
-    collection = db.get_collection("energy")
+    collection = db.get_collection("nba")
     return list(collection.find())
 
 def to_df():

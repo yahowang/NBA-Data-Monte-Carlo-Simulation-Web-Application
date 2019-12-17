@@ -17,6 +17,7 @@ def _get_data():
     table_body = soup.find('tbody')
     rows = table_body.find_all('tr')
     data = [] # a list of records.
+    percents = ['FG%', '3P%', '2P%', 'eFG%', 'FT%']
     feature_names = [row.text.strip() for row in soup.find('thead').find_all("th")]
     rank = 1
     for r in rows:
@@ -27,7 +28,14 @@ def _get_data():
             rank += 1
             record = dict() # store the record for this player
             for i in range(len(feature_names)):
-                record[feature_names[i]] = cols[i]
+                name = feature_names[i]
+                if name in percents:
+                    record[name] = float(cols[i])
+                else:
+                    try:
+                        record[name] = int(cols[i])
+                    except:
+                        record[name] = cols[i]
             data.append(record)
     return data
 

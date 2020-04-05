@@ -1,2 +1,2 @@
 # data1050project
-This is the final project for Data 1050 Fall 2019. The team is Ctrl-C_Ctrl-V.
+This a website application generating NBA players' performances with up-to-date information. You may create your own dream team from each individual player and compete against other teams. 
